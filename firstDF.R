@@ -31,8 +31,34 @@ managers_data$Age[managers_data$Age == 99] <- NA # if age == 99 replace with NA
 
 managers_data
 
+# create age-cat column with young, middleages and old
 managers_data$age_cat[managers_data$Age < 25] <- "Young"
 managers_data$age_cat[managers_data$Age >= 25 & managers_data$Age < 44] <- "Middle aged"
 managers_data$age_cat[managers_data$Age >= 44] <- "elder"
 
 managers_data
+
+# recode age-cat to ordinal
+managers_data$age_cat[managers_data$Age < 25] <- 1
+managers_data$age_cat[managers_data$Age >= 25 & managers_data$Age < 44] <- 2
+managers_data$age_cat[managers_data$Age >= 44] <- 3
+
+managers_data
+
+# summary column
+managers_data$row_summary[managers_data$Age < 25 & managers_data$Country == "US"] <- "Young Yank"
+managers_data$row_summary[managers_data$Age >= 25 & managers_data$Age < 44 & managers_data$Country == "US"] <- "Middle aged yank"
+managers_data$row_summary[managers_data$Age >= 44 & managers_data$Country == "US"] <- "Old Yank"
+managers_data$row_summary[managers_data$Age < 25 & managers_data$Country == "IRL"] <- "Young Paddy"
+managers_data$row_summary[managers_data$Age >= 25 & managers_data$Age < 44 & managers_data$Country == "IRL"] <- "Middle aged Paddy"
+managers_data$row_summary[managers_data$Age >= 44 & managers_data$Country == "IRL"] <- "Old Paddy"
+
+managers_data
+
+managers_data$an_sum[managers_data$Age > 0] <- paste(managers_data["Q1"], managers_data["Q2"], managers_data["Q3"])
+
+managers_data
+
+
+
+
